@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "start": "node .js/index.js",
-    "dev": "nodemon .js/index.js"
+    "start": "node ./js/index.js",
+    "dev": "nodemon ./js/index.js"
   },
   "keywords": [
     "hello",
