@@ -7,5 +7,18 @@
 </head>
 <body>
     
+    <script>
+        (async ()=>{
+            const response = await fetch(`http://localhost:5000/api/users`)
+            const data = await response.json();
+
+            const newHeader = document.createElement('h1') 
+            newHeader.textContent = data[0].name
+            document.body.append(newHeader);
+            
+        })()
+
+
+    </script>
 </body>
 </html>
