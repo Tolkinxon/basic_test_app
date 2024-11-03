@@ -15,10 +15,24 @@ const server = http.createServer((req, res)=>{
     }
 
     if(req.method === 'POST'){
-        const body = [];
-        req.on('data', data => {
-            body.push(Buffer.from(data).toString())
-            console.log(body)
+        req.on('data', postData => {
+            fs.readFile(
+                path.join(__dirname, "data_base", "users.json"),  
+                
+                (err, data) => {
+                if(err) throw err;
+    
+                const body = JSON.parse(Buffer.from(data).toString())
+                
+                const newUserArr = Buffer.from(postData).toString().split('&').map(item => item.split('='));
+                const newUserObj =  Object.fromEntries(newUserArr);
+                body.push(newUserObj);
+ 
+                fs.writeFile(path.join(__dirname, "data_base", "users.json"), JSON.stringify(body) , (err) => {
+                    if(err)  throw err;    
+                    console.log('file created successfully'); 
+                })
+            })
         })
     }
 
@@ -30,7 +44,7 @@ const server = http.createServer((req, res)=>{
             (err, data) => {
                 if(err) throw err
                 res.end(Buffer.from(data).toString());        
-            })
+        })
     }
 });
 
