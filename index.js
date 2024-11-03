@@ -10,24 +10,28 @@ const server = http.createServer((req, res)=>{
       };
 
 
-    if(req.url === '/'){
-        res.end(`<h1>hello world</h1>`);
+    if(req.url == '/'){
+        fs.readFile(path.join(__dirname, "index.html"), "utf-8", (err, content)=>{ if(err){throw err}  res.end(content) })
     }
 
-    if(req.url === '/about'){
-        res.end(`<h1>hello world</h1>`);
+    if(req.method === 'POST'){
+        const body = [];
+        req.on('data', data => {
+            body.push(Buffer.from(data).toString())
+            console.log(body)
+        })
     }
 
     if(req.url === '/api/users'){
         res.writeHead(200, headers);
         fs.readFile(
-            path.join(path.dirname(__dirname), "data_base", "users.json"),  
+            path.join(__dirname, "data_base", "users.json"),  
             
             (err, data) => {
-            if(err) throw err
-            res.end(Buffer.from(data).toString());          
+                if(err) throw err
+                res.end(Buffer.from(data).toString());        
             })
-        }
+    }
 });
 
 server.listen('5000',()=>{
