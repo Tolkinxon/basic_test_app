@@ -1,0 +1,32 @@
+[
+    [
+        {
+            "question": "Java Script case sensetive dasturlash tilimi yoki case insensetive?",
+            "answer": "Case sensetive",
+            "a": "Case insensetive",
+            "b": "Interpretter",
+            "c": "Case sensetive",
+            "id": 1
+        }
+    ],
+    [
+        {
+            "question": "HTML ning kengaytmasi?",
+            "answer": "Hyper Text Markup Language",
+            "a": "Hybrite Text Markup Language",
+            "b": "Hyper Text Markup Language",
+            "c": "Hyper Text Making Language",
+            "id": 11
+        }
+    ],
+    [
+        {
+            "question": "JavaScriptda primitiv o'zgaruvchilar nechta?",
+            "answer": "7 ta",
+            "a": "2 ta",
+            "b": "7 ta",
+            "c": "8 ta",
+            "id": 21
+        }
+    ]
+]

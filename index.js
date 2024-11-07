@@ -57,10 +57,19 @@ const server = http.createServer( async (req, res)=>{
         })
     }
     
-    else if(req.url === '/api/users'){
+    else if(req.url === '/users'){
             res.writeHead(200, headers);
             const users = await fs.readFile(path.join("database", "users.json"),  "UTF-8")
             res.end(users)
+    }
+
+    else if(req.url.includes('/questions')){
+        res.writeHead(200, headers);
+        let questions = await fs.readFile(path.join("database", "questions.json"),  "UTF-8")
+              questions = questions ? JSON.parse(questions) : [];
+        const page = req.url.at(-1)
+        const currentQuestionPage = questions[page - 1];  
+        res.end(JSON.stringify(currentQuestionPage))
     }
 });
 
