@@ -6,7 +6,7 @@ const server = http.createServer( async (req, res)=>{
 
     const headers = {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization'
     };
@@ -60,8 +60,28 @@ const server = http.createServer( async (req, res)=>{
     
     else if(req.url === '/users'){
             res.writeHead(200, headers);
-            const users = await fs.readFile(path.join("database", "users.json"),  "UTF-8")
-            res.end(users)
+           
+            let user = '';
+            req.on('data', async data => {
+                user = JSON.parse(Buffer.from(data).toString());
+            })
+
+            req.on('end', async ()=>{
+                let users = await fs.readFile(path.join("database", "users.json"), "UTF-8");
+                    users = users ? JSON.parse(users) : [];
+    
+                const editedUserIndex = users.findIndex(item => item.email == user.email);
+                if(editedUserIndex !== -1){ 
+                    users[editedUserIndex] = user;
+                    console.log(user);
+                    
+                    fs.writeFile(path.join("database", "users.json"), JSON.stringify(users)); 
+                    res.end(JSON.stringify({message: "data successfully confirmed"}));
+                }
+                else {
+                    res.end(JSON.stringify({message: "Something went wrong please try again"}));
+                }
+            })
     }
 
     else if(req.url.includes('/questions')){

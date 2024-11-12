@@ -26,7 +26,7 @@
     [
         {
             "question": "HTML ning kengaytmasi?",
-            "answer": "Hyper Text Markup Language",
+            "answer": "b",
             "a": "Hybrite Text Markup Language",
             "b": "Hyper Text Markup Language",
             "c": "Hyper Text Making Language",
@@ -36,7 +36,7 @@
     [
         {
             "question": "JavaScriptda primitiv o'zgaruvchilar nechta?",
-            "answer": "7 ta",
+            "answer": "b",
             "a": "2 ta",
             "b": "7 ta",
             "c": "8 ta",
