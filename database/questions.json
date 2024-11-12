@@ -2,11 +2,25 @@
     [
         {
             "question": "Java Script case sensetive dasturlash tilimi yoki case insensetive?",
-            "answer": "Case sensetive",
+            "answer": "c",
             "a": "Case insensetive",
             "b": "Interpretter",
             "c": "Case sensetive",
             "id": 1
+        },        {
+            "question": "EcmaScript qachondan tashkil topgan?",
+            "answer": "a",
+            "a": "1997 - yildan",
+            "b": "1993 - yildan",
+            "c": "1990 - yildan",
+            "id": 2
+        },        {
+            "question": "Assember software tomonga kiradimi yoki hardware tomonga kiradimi?",
+            "answer": "b",
+            "a": "Hardware",
+            "b": "Software",
+            "c": "Ikkaloviga ham kirmaydi",
+            "id": 3
         }
     ],
     [
