@@ -92,7 +92,14 @@ const server = http.createServer( async (req, res)=>{
         const currentQuestionPage = questions[page - 1];  
         res.end(JSON.stringify(currentQuestionPage))
     }
-});
+    else if(req.url === '/statistics'){
+        res.writeHead(200, headers);
+        let users = await fs.readFile(path.join("database", "users.json"),  "UTF-8")
+        users = users ? JSON.parse(users) : [];
+        res.end(JSON.stringify(users))
+    }
+    
+});``
 
 server.listen('5000',()=>{
     console.log('server initialized');    
