@@ -7,20 +7,54 @@
             "b": "Interpretter",
             "c": "Case sensetive",
             "id": 1
-        },        {
+        },        
+        {
             "question": "EcmaScript qachondan tashkil topgan?",
             "answer": "a",
             "a": "1997 - yildan",
             "b": "1993 - yildan",
             "c": "1990 - yildan",
             "id": 2
-        },        {
+        },        
+        {
             "question": "Assember software tomonga kiradimi yoki hardware tomonga kiradimi?",
             "answer": "b",
             "a": "Hardware",
             "b": "Software",
             "c": "Ikkaloviga ham kirmaydi",
             "id": 3
+        },        
+        {
+            "question": "Submitter nima?",
+            "answer": "c",
+            "a": "Pointor event bo'lganda chiqariladigan ma'lumot",
+            "b": "Style yozishda ishlatiladigan selector",
+            "c": "Form ichida submit vazifasini bajaruvchi button",
+            "id": 4
+        },        
+        {
+            "question": "Class nima uchun kerak?",
+            "answer": "a",
+            "a": "Html file dagi o'zimizga kerakli tagni ajratib olish yoki guruhlash uchun kerak bo'ladigan selector?",
+            "b": "Css da nuqta bilan chaqriluchi selector",
+            "c": "Tag nomi",
+            "id": 5
+        },
+        {
+            "question": "JavaScriptda o'zgaruvchilar qanday e'lon qilinadi?",
+            "answer": "a",
+            "a": "let",
+            "b": "int",
+            "c": "float",
+            "id": 6
+        },
+        {
+            "question": "Quyidagilardan qaysi biri JavaScriptni HTML faylga ulashda ishlatiladi?",
+            "answer": "b",
+            "a": "<link>",
+            "b": "<script>",
+            "c": "<style>",
+            "id": 7
         }
     ],
     [
@@ -31,6 +65,54 @@
             "b": "Hyper Text Markup Language",
             "c": "Hyper Text Making Language",
             "id": 11
+        },
+        {
+            "question": "JavaScriptda qaysi belgi komment yozishda ishlatiladi?",
+            "answer": "a",
+            "a": "//",
+            "b": "/*",
+            "c": "#",
+            "id": 12
+        },
+        {
+            "question": "console.log() funksiyasi nima qiladi?",
+            "answer": "c",
+            "a": "O'zgaruvchini belgilaydi",
+            "b": "Sahifaga matn qo'shadi",
+            "c": "Konsolga ma'lumot chiqaradi",
+            "id": 13
+        },
+        {
+            "question": "JavaScriptda massiv qanday belgilanadi?",
+            "answer": "b",
+            "a": "{1, 2, 3}",
+            "b": "[1, 2, 3]",
+            "c": "(1, 2, 3)",
+            "id": 14
+        },
+        {
+            "question": "== va === o'rtasidagi farq nima?",
+            "answer": "b",
+            "a": "Farq yo'q, ikkalasi tenglikni tekshiradi",
+            "b": "=== ma'lumot turini ham tekshiradi, == esa faqat qiymatni",
+            "c": "== faqat qiymatni tekshiradi, === esa faqat ma'lumot turini",
+            "id": 15
+        },
+        {
+            "question": "JavaScriptda if shart operatori qanday yoziladi?",
+            "answer": "c",
+            "a": "if x = 5",
+            "b": "if x == 5 then",
+            "c": "if (x == 5)",
+            "id": 16
+        },
+        {
+            "question": "JavaScriptda funksiyani qanday e'lon qilish mumkin?",
+            "answer": "a",
+            "a": "function myFunction()",
+            "b": "func myFunction()",
+            "c": "def myFunction()",
+            "id": 17
         }
     ],
     [
@@ -41,6 +123,54 @@
             "b": "7 ta",
             "c": "8 ta",
             "id": 21
+        },
+        {
+            "question": "JavaScriptda ob'ekt qanday e'lon qilinadi?",
+            "answer": "a",
+            "a": "var obj = {};",
+            "b": "let obj = [];",
+            "c": "const obj = ();",
+            "id": 22
+        },
+        {
+            "question": "alert() funksiyasi nima qiladi?",
+            "answer": "a",
+            "a": "Sahifada ma'lumot chiqaradi foydalanuvchi uchun",
+            "b": "Konsolda matn chiqaradi",
+            "c": "Xatolikni ko'rsatadi",
+            "id": 23
+        },
+        {
+            "question": "for tsiklida indeksni qanday oshirish mumkin?",
+            "answer": "c",
+            "a": "i = i + 1",
+            "b": "i++",
+            "c": "Har ikkisi",
+            "id": 24
+        },
+        {
+            "question": "JavaScriptda qiymatni matnga aylantirish uchun qaysi funksiyadan foydalaniladi?",
+            "answer": "a",
+            "a": "toString()",
+            "b": "parseInt()",
+            "c": "Stringify()",
+            "id": 25
+        },
+        {
+            "question": "parseInt('123abc') funksiyasining natijasi nima?",
+            "answer": "c",
+            "a": "123abc",
+            "b": "NaN",
+            "c": "123",
+            "id": 26
+        },
+        {
+            "question": "Math.random() funksiyasi nima qiladi?",
+            "answer": "b",
+            "a": "Tasodifiy butun son qaytaradi",
+            "b": "0 va 1 orasida tasodifiy son qaytaradi",
+            "c": "Tasodifiy matn qaytaradi",
+            "id": 27
         }
     ]
 ]

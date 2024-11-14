@@ -1,6 +1,7 @@
 const http = require('http');
 const fs = require('fs').promises;
 const path = require('path');
+const  createToken = require('./create-token.js');
 
 const server = http.createServer( async (req, res)=>{
 
@@ -24,14 +25,13 @@ const server = http.createServer( async (req, res)=>{
             let users = await fs.readFile(path.join("database", "users.json"), "UTF-8");
                 users = users ? JSON.parse(users) : [];
 
-            user = {...user, page:1, isCorrect: 0}
+            user = {...user, page:1, isCorrect: 0, token: createToken()}
             const compareFn = item => item.email == user.email
-            if(users.some(compareFn)) res.end(JSON.stringify({message: "This email already excist", state: false}));
+            if(users.some(compareFn)) res.end(JSON.stringify({message: "This email already excist"}));
             else {
                 users.push(user);
-                fs.writeFile(path.join("database", "users.json"), JSON.stringify(users)); 
-                        
-                res.end(JSON.stringify({message: "This user successfully added", state: true, user:{...user}}));
+                fs.writeFile(path.join("database", "users.json"), JSON.stringify(users, null, 4)); 
+                res.end(JSON.stringify({message: "This user successfully added", token: user.token}));
             }
         })
     } 
@@ -50,32 +50,36 @@ const server = http.createServer( async (req, res)=>{
                 
             const foundedUser = users.find(item => item.email == user.email)
             if(foundedUser){
-                res.end(JSON.stringify({message: 'Checking was successfully', state: true, user:{...foundedUser}}));
+                res.end(JSON.stringify({message: 'Checking was successfully', token: foundedUser.token}));
             }
             else {
-                res.end(JSON.stringify({message: "We don't found your email please sign up", state: false}));
+                res.end(JSON.stringify({message: "We don't found your email please sign up"}));
             }
         })
     }
     
     else if(req.url === '/users'){
             res.writeHead(200, headers);
+            const authHeader = req.headers['authorization'];
            
             let user = '';
             req.on('data', async data => {
-                user = JSON.parse(Buffer.from(data).toString());
+                answers = JSON.parse(Buffer.from(data).toString());
             })
 
             req.on('end', async ()=>{
                 let users = await fs.readFile(path.join("database", "users.json"), "UTF-8");
                     users = users ? JSON.parse(users) : [];
     
-                const editedUserIndex = users.findIndex(item => item.email == user.email);
+                const editedUserIndex = users.findIndex(item => item.token == authHeader);
                 if(editedUserIndex !== -1){ 
-                    users[editedUserIndex] = user;
-                    console.log(user);
-                    
-                    fs.writeFile(path.join("database", "users.json"), JSON.stringify(users)); 
+                    users[editedUserIndex] = {
+                        ...users[editedUserIndex], 
+                        isCorrect: users[editedUserIndex].isCorrect + answers.isCorrect,
+                        page: users[editedUserIndex].page + 1
+                    };
+                                        
+                    fs.writeFile(path.join("database", "users.json"), JSON.stringify(users, null, 4)); 
                     res.end(JSON.stringify({message: "data successfully confirmed"}));
                 }
                 else {
@@ -84,22 +88,52 @@ const server = http.createServer( async (req, res)=>{
             })
     }
 
-    else if(req.url.includes('/questions')){
+    else if(req.url === '/questions'){
         res.writeHead(200, headers);
-        let questions = await fs.readFile(path.join("database", "questions.json"),  "UTF-8")
+        const authHeader = req.headers['authorization'];
+
+        let users = await fs.readFile(path.join("database", "users.json"), "UTF-8");
+        users = users ? JSON.parse(users) : [];
+
+        const foundedUser = users.find(item => item.token == authHeader)
+        if(foundedUser){
+            let questions = await fs.readFile(path.join("database", "questions.json"),  "UTF-8")
             questions = questions ? JSON.parse(questions) : [];
-        const page = req.url.at(-1)
-        const currentQuestionPage = questions[page - 1];  
-        res.end(JSON.stringify(currentQuestionPage))
+            const page = foundedUser.page
+            let currentQuestionPage = questions[page - 1] || [];  
+            currentQuestionPage = currentQuestionPage.sort((a, b) => 0.5 - Math.random()).slice(0, 5)
+            res.end(JSON.stringify([currentQuestionPage, foundedUser]))
+        }
+        else {
+            res.end(JSON.stringify({message: "We don't found your identity please sign up", state: false}));
+        }
     }
+
     else if(req.url === '/statistics'){
         res.writeHead(200, headers);
         let users = await fs.readFile(path.join("database", "users.json"),  "UTF-8")
         users = users ? JSON.parse(users) : [];
         res.end(JSON.stringify(users))
     }
+
+    else if(req.url === '/next-stage'){
+        res.writeHead(200, headers);
+
+        const authHeader = req.headers['authorization'];
+
+        let users = await fs.readFile(path.join("database", "users.json"),  "UTF-8")
+        users = users ? JSON.parse(users) : [];
+
+        const foundedUser = users.find(item => item.token == authHeader)
+        if(foundedUser){
+            res.end(JSON.stringify({message: 'Checking was successfully', token: foundedUser.token}));
+        }
+        else {
+            res.end(JSON.stringify({message: "We don't found your edentity please sign up"}));
+        }
+    }
     
-});``
+});
 
 server.listen('5000',()=>{
     console.log('server initialized');    
