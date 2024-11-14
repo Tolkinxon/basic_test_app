@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./../css/main.css">
+    <title>test</title>
+</head>
+<body>
+    <h1 id="js_user_name" class="user-name"></h1>
+
+    <h2 class="page js-page"></h2>
+
+    <ul class="js-list">
+        <template class="js-template-li">
+            <li>
+                <form>
+                    <p class="question">question</p>
+                    <label class="a"><input type="radio" name="answer" value="a" ></label>
+                    <label class="b"><input type="radio" name="answer" value="b" ></label>
+                    <label class="c"><input type="radio" name="answer" value="c" ></label>
+                </form>
+            </li>
+        </template>
+    </ul>
+
+    <button class="btn js-send-btn">send answers</button>
+    <button class="btn js-next-stage" disabled>next stage</button>
+    <p class="p js-right-answer"></p>
+
+    <button class="stasitics-btn js-stasitics-btn">stasitics</button>
+    <button class="stasitics-btn logout js-logout-btn">log out</button>
+
+    <div class="stasitics js-statistics">
+        <h3>Statistics table</h3>
+        <ul class="stasitics__list js-stasitics-list">
+            <template class="js-stasitics-template">
+                <li class="stasitics__item">
+                    <p class="stasitics__user-name">ism</p>
+                    <div class="diagramm-wrapper">
+                        <span class="statistics__procent">10%</span>
+                        <div class="diagramm"></div>
+                    </div>
+                </li>
+            </template>
+        </ul>
+    </div>
+
+    <script src="../js/question.js"></script>
+    <script src="../js/statistics.js"></script>
+</body>
+</html>
